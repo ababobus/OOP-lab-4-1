@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,11 +27,23 @@ namespace WindowsFormsApp1
         {
             private int x, y;
             private const int radius = 30;
+            public bool isSelected;
             public CCircle(int x_pos, int y_pos) { 
                 x = x_pos;
                 y = y_pos;
 
             }
+
+            public void draw(Graphics g)
+            {
+                Brush brush = isSelected ? Brushes.Red : Brushes.Blue;
+                g.FillEllipse(brush, x - radius, y - radius, 2 * radius, 2 * radius);
+                Debug.WriteLine("CCircle.draw");
+            }
+
+            
+
+
         }
     }
 }
