@@ -16,5 +16,21 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        class CCircle
+        {
+            private int x, y;
+            private const int radius = 30;
+            public CCircle(int x_pos, int y_pos) { 
+                x = x_pos;
+                y = y_pos;
+
+            }
+        }
     }
 }
