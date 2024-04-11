@@ -19,6 +19,18 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        const int radius = 30;
+
+        class CCircle
+        {
+            public Rectangle crug;
+            bool Selected = false;
+            public CCircle(int x, int y)
+            {
+                crug = new Rectangle(x, y, radius * 2, radius * 2);
+            }
+        }
+
         List<CCircle> Circles = new List<CCircle>();
 
 
