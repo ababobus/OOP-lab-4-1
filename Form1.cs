@@ -68,43 +68,42 @@ namespace WindowsFormsApp1
         List<CCircle> Circles = new List<CCircle>();
 
 
-        private void Figures_MouseClick(object sender, MouseEventArgs e)
+        private void PictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            foreach (var i in Circles)
+                i.Draw(e);
+        }
+        private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             bool CircleClickFlag = false;
-            if (IsCtrl  == false|| CtrlCheckBox.Checked == false)
+            if (IsCtrl == false || CtrlCheckBox.Checked == false)
                 foreach (var i in Circles)
                     i.SetSelect(false);
 
             foreach (var i in Circles) 
             {
-                if (i.IsClicked(e.X - radius, e.Y - radius))
+                if (i.IsClicked(e.X - radius, e.Y - radius))  
                 {
                     i.ChangeSelect();
                     CircleClickFlag = true;
                     if (OverlayCheckBox.Checked == false)
-                        break;
+                        break; 
                 }
             }
 
-            if (CircleClickFlag == false)
+            if (CircleClickFlag == false) 
             {
                 if (IsCtrl == false|| CtrlCheckBox.Checked == false)
                     foreach (var i in Circles)
                         i.SetSelect(false);
-                Circles.Add(new CCircle(e.X - radius, e.Y - radius));
-
+                Circles.Add(new CCircle(e.X - radius, e.Y - radius)); 
             }
-            Figures.Invalidate();
+            PictureBox.Invalidate();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             PenCircleMake();
-        }
-        private void Figures_Paint(object sender, PaintEventArgs e) // Событие отрисовки
-        {
-            foreach (var i in Circles)
-                i.Draw(e);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -121,9 +120,9 @@ namespace WindowsFormsApp1
                 if (Circles.Count != 0)
                     Circles.Last().SetSelect(true);
 
-                Figures.Invalidate();
+                PictureBox.Invalidate();
             }
-            else if (e.Control) // Нажатие CTRL
+            else if (e.Control) 
             {
                 IsCtrl = true;
             }
@@ -133,7 +132,7 @@ namespace WindowsFormsApp1
         {
             if (e.KeyCode == Keys.ControlKey)
             {
-                IsCtrl = false;
+                IsCtrl = false; //при отрисовке нового круга не были выбраны предыдущие круги
             }
         }
     }
