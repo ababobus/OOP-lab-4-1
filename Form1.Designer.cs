@@ -31,6 +31,7 @@
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.CtrlCheckBox = new System.Windows.Forms.CheckBox();
             this.OverlayCheckBox = new System.Windows.Forms.CheckBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,11 +68,21 @@
             this.OverlayCheckBox.Text = "OVERLAY";
             this.OverlayCheckBox.UseVisualStyleBackColor = true;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(1, 135);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 84);
+            this.listBox1.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 816);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.OverlayCheckBox);
             this.Controls.Add(this.CtrlCheckBox);
             this.Controls.Add(this.PictureBox);
@@ -93,6 +104,7 @@
         private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.CheckBox CtrlCheckBox;
         private System.Windows.Forms.CheckBox OverlayCheckBox;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

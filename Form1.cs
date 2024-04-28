@@ -19,50 +19,16 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        static readonly Pen PenCircleSelect = new Pen(Brushes.HotPink);
-        static readonly Pen PenCircleNotSelect = new Pen(Brushes.Black);
-        void PenCircleMake()
+        public static readonly Pen PenCircleSelect = new Pen(Brushes.HotPink);
+        public static readonly Pen PenCircleNotSelect = new Pen(Brushes.Black);
+        
+        public static readonly int radius = 30;
+        bool IsCtrl = false;
+       
+        private void Form1_Load(object sender, EventArgs e)
         {
             PenCircleSelect.Width = 2;
             PenCircleNotSelect.Width = 2;
-        }
-        const int radius = 30;
-        bool IsCtrl = false;
-        class CCircle
-        {
-            public Rectangle crug;
-            bool Selected = false;
-            public CCircle(int x, int y)
-            {
-                crug = new Rectangle(x, y, radius * 2, radius * 2);
-                Selected = true;
-            }
-
-            public void Draw(PaintEventArgs e) 
-            {
-                Graphics graphic = e.Graphics;
-                graphic.DrawEllipse((Selected ? PenCircleSelect : PenCircleNotSelect), crug);
-            }
-
-            public bool IsClicked(int x, int y) 
-            {
-                if (Math.Abs(crug.X - x) <= radius && Math.Abs(crug.Y - y) <= radius)
-                    return true;
-                else
-                    return false;
-            }
-            public void SetSelect(bool select) 
-            {
-                Selected = select;
-            }
-            public void ChangeSelect() 
-            {
-                Selected = !Selected;
-            }
-            public bool GetSelect()
-            {
-                return Selected;
-            }
         }
 
         List<CCircle> Circles = new List<CCircle>();
@@ -82,7 +48,8 @@ namespace WindowsFormsApp1
 
             foreach (var i in Circles) 
             {
-                if (i.IsClicked(e.X - radius, e.Y - radius))  
+                //if (i.IsClicked(e.X-radius, e.Y - radius))
+                if (i.IsClicked(e.X, e.Y))
                 {
                     i.ChangeSelect();
                     CircleClickFlag = true;
@@ -96,15 +63,12 @@ namespace WindowsFormsApp1
                 if (IsCtrl == false|| CtrlCheckBox.Checked == false)
                     foreach (var i in Circles)
                         i.SetSelect(false);
-                Circles.Add(new CCircle(e.X - radius, e.Y - radius)); 
+                //Circles.Add(new CCircle(e.X-radius, e.Y-radius)); 
+                Circles.Add(new CCircle(e.X, e.Y));
             }
             PictureBox.Invalidate();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            PenCircleMake();
-        }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -132,8 +96,48 @@ namespace WindowsFormsApp1
         {
             if (e.KeyCode == Keys.ControlKey)
             {
-                IsCtrl = false; //при отрисовке нового круга не были выбраны предыдущие круги
+                IsCtrl = false; 
             }
+        }
+
+    }
+    class CCircle
+    {
+        private int x;
+        private int y;
+        bool Selected = false;
+
+        public CCircle(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+            Selected = true;
+        }
+
+        public void Draw(PaintEventArgs e)
+        {
+            Graphics graphic = e.Graphics;
+            graphic.DrawEllipse((Selected ? Form1.PenCircleSelect : Form1.PenCircleNotSelect), this.x - Form1.radius, this.y - Form1.radius, Form1.radius * 2, Form1.radius * 2);
+        }
+
+        public bool IsClicked(int x, int y)
+        {
+            if ((this.x - x) * (this.x - x) + (this.y - y) * (this.y - y) <= Form1.radius * Form1.radius)
+                return true;
+            else
+                return false;
+        }
+        public void SetSelect(bool select)
+        {
+            Selected = select;
+        }
+        public void ChangeSelect()
+        {
+            Selected = !Selected;
+        }
+        public bool GetSelect()
+        {
+            return Selected;
         }
     }
 
