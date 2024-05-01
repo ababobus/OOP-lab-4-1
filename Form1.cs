@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
         public static readonly Pen PenCircleSelect = new Pen(Brushes.HotPink);
         public static readonly Pen PenCircleNotSelect = new Pen(Brushes.Black);
         
-        public static readonly int radius = 30;
+        //public static readonly int radius = 30;
         bool IsCtrl = false;
        
         private void Form1_Load(object sender, EventArgs e)
@@ -100,45 +100,6 @@ namespace WindowsFormsApp1
             }
         }
 
-    }
-    class CCircle
-    {
-        private int x;
-        private int y;
-        bool Selected = false;
-
-        public CCircle(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-            Selected = true;
-        }
-
-        public void Draw(PaintEventArgs e)
-        {
-            Graphics graphic = e.Graphics;
-            graphic.DrawEllipse((Selected ? Form1.PenCircleSelect : Form1.PenCircleNotSelect), this.x - Form1.radius, this.y - Form1.radius, Form1.radius * 2, Form1.radius * 2);
-        }
-
-        public bool IsClicked(int x, int y)
-        {
-            if ((this.x - x) * (this.x - x) + (this.y - y) * (this.y - y) <= Form1.radius * Form1.radius)
-                return true;
-            else
-                return false;
-        }
-        public void SetSelect(bool select)
-        {
-            Selected = select;
-        }
-        public void ChangeSelect()
-        {
-            Selected = !Selected;
-        }
-        public bool GetSelect()
-        {
-            return Selected;
-        }
     }
 
 
